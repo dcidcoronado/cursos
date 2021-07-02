@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Delete a course{% endblock %}
+
+{% block content %}
+
+<h3 class="fw-bold mb-4" >Are you sure you want to delete the following course?</h3>
+<p>Name: {{course.name}}</p>
+<p>Description: {{course.description}}</p>
+<div class="col-6 text-end mt-4">
+    <a href="/" class="btn btn-secondary">No</a>
+    <a href="/destroy/{{course.id}}" class="btn btn-danger">Yes! I want to delete this</a>
+</div>
+{% endblock %}
