@@ -6,18 +6,18 @@ class CourseManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
 
-        NAME_REGEX = re.compile(r'^[A-Z0-9][a-zA-Z0-9\s]+$')
+        NAME_REGEX = re.compile(r'^[A-Z0-9][\w\s]+$')
         if postData['name']:
             if not NAME_REGEX.match(postData['name']):    
                 errors['name'] = "Name must start with a capital letter!"
             elif len(postData['name']) < 5:
-                errors['name'] = "The name of the show must be at least 2 characters long"
+                errors['name'] = "The name of the show must be at least 5 characters long"
             elif Course.objects.filter(name=postData['name']) :
-                errors['name'] = "Must be a new show"
+                errors['name'] = "Must be a new course"
         if not postData['name']:
             errors['name'] = "Must enter a Name"
 
-        DESC_REGEX = re.compile(r'^[A-Z0-9][a-zA-Z0-9\s\-!$%^&*()_+|\'\~=`{}\[\]:";<>¡¿?,.\/]+$')
+        DESC_REGEX = re.compile(r'^[A-Z0-9][\w\s\-!$%^&*()_+|\'\~=`{}\[\]:";<>¡¿?,.\/]+$')
         if postData['description']: 
             if not DESC_REGEX.match(postData['description']):    
                 errors['description'] = "Description must start with a capital letter!"
